@@ -29,13 +29,32 @@ export default function Searchbar({
               xs: "70%",
               md: "60%",
             },
+            "& .MuiInput-underline:before": {
+              borderBottomColor: (theme) => theme.palette.text.primary,
+            },
+            "& .MuiInput-underline:hover:before": {
+              borderBottomColor: (theme) => theme.palette.text.primary,
+            },
+            "& .MuiInputLabel-root": {
+              color: (theme) => theme.palette.text.primary,
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: (theme) => theme.palette.primary.main,
+            },
           }}
         />
         <Stack direction="row" gap="5px" alignItems={"flex-end"}>
-          <IconButton onClick={onSearchClick}>
-            <SearchIcon />
+          <IconButton color="secondary" onClick={onSearchClick}>
+            <SearchIcon color="primary" />
           </IconButton>
-          <Button variant="text">Arabic</Button>
+          <Button
+            sx={{
+              textTransform: "none",
+            }}
+            variant="text"
+          >
+            Arabic
+          </Button>
         </Stack>
       </Box>
     </>

@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Stack } from "@mui/material";
+import { Box, CircularProgress, Container, Stack } from "@mui/material";
 import PredictionList from "./components/Predictions-List/PredictionsList";
 import WeatherDetails from "./components/Weather-Details/WeatherDetails";
 import Searchbar from "./components/SearchBar/SearchBar";
@@ -37,7 +37,11 @@ export default function App() {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        backgroundColor: (theme) => theme.palette.background.default,
+      }}
+    >
       <Container
         maxWidth="md"
         sx={{
@@ -76,6 +80,6 @@ export default function App() {
           </Stack>
         )}
       </Container>
-    </>
+    </Box>
   );
 }

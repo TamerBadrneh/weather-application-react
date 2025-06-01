@@ -9,7 +9,12 @@ export default function WeatherDetails({ weather, timezone }) {
 
   return (
     <>
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          color: (theme) => theme.palette.text.primary,
+        }}
+      >
         <Grid size={8}>
           <Box>
             <Typography
