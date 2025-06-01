@@ -45,7 +45,8 @@ export default function App() {
           flexDirection: "column",
           justifyContent: "center",
           gap: "60px",
-          height: "100vh",
+          minHeight: "100vh",
+          py: "80px",
         }}
       >
         {weather && weeklyWeatherTemps ? (

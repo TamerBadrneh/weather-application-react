@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, TextField } from "@mui/material";
+import { Box, Button, IconButton, Stack, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 export default function Searchbar({
   location,
@@ -8,11 +8,15 @@ export default function Searchbar({
   return (
     <>
       <Box
-        width="80%"
         sx={{
+          width: { xs: "100%", md: "80%" },
           display: "flex",
           gap: "10px",
           alignItems: "flex-end",
+          justifyContent: {
+            xs: "center",
+            sm: "flex-start",
+          },
         }}
       >
         <TextField
@@ -21,13 +25,18 @@ export default function Searchbar({
           label="Enter Location"
           variant="standard"
           sx={{
-            width: "60%",
+            width: {
+              xs: "70%",
+              md: "60%",
+            },
           }}
         />
-        <IconButton onClick={onSearchClick}>
-          <SearchIcon />
-        </IconButton>
-        <Button variant="text">Arabic</Button>
+        <Stack direction="row" gap="5px" alignItems={"flex-end"}>
+          <IconButton onClick={onSearchClick}>
+            <SearchIcon />
+          </IconButton>
+          <Button variant="text">Arabic</Button>
+        </Stack>
       </Box>
     </>
   );

@@ -19,13 +19,32 @@ export default function PredictionList({ weeklyWeatherTemps }) {
             gap: "10px",
           }}
         >
-          <Typography variant="h6" component={"p"}>
+          <Typography
+            variant="h6"
+            component={"p"}
+            sx={{
+              textAlign: {
+                xs: "center",
+                sm: "left",
+              },
+            }}
+          >
             Weekly Average Tempreture
           </Typography>
-          <Stack direction="row" gap="10px">
+          <Stack
+            direction="row"
+            gap="10px"
+            flexWrap="wrap"
+            sx={{
+              justifyContent: {
+                xs: "center",
+                sm: "flex-start",
+              },
+            }}
+          >
             {weeklyWeatherTemps.daily.time.map((date, index) => (
               <PredictionUnit
-                image={
+                forecastData={
                   WEATHER_CODE[
                     Number(weeklyWeatherTemps.daily.weathercode[index])
                   ]
