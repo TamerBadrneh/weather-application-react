@@ -1,14 +1,18 @@
-import {
-  Card,
-  CardContent,
-  CircularProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Stack, Typography } from "@mui/material";
 import PredictionUnit from "../Prediction-Unit/PredictionUnit";
 import { WEATHER_CODE } from "../../constants/WeatherCode";
+import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { LanguageContext } from "../../context/LanguageContext";
 
 export default function PredictionList({ weeklyWeatherTemps }) {
+  const { currentLanguage } = useContext(LanguageContext);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(currentLanguage);
+  }, [i18n, currentLanguage]);
+
   return (
     <>
       <Card>
@@ -25,11 +29,11 @@ export default function PredictionList({ weeklyWeatherTemps }) {
             sx={{
               textAlign: {
                 xs: "center",
-                sm: "left",
+                sm: currentLanguage === "ar" ? "right" : "left",
               },
             }}
           >
-            Weekly Average Tempreture
+            {t("Weekly Average Tempreture".toLowerCase())}
           </Typography>
           <Stack
             direction="row"

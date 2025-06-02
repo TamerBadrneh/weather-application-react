@@ -9,16 +9,41 @@ import {
   Stack,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useContext, useEffect } from "react";
+import { LanguageContext } from "../../context/LanguageContext";
+import { useTranslation } from "react-i18next";
+
 export default function CountrySelection({
   location,
   onLocationChange,
   onSearchClick,
 }) {
+  const { currentLanguage, setNewLanguage } = useContext(LanguageContext);
+  const { t, i18n } = useTranslation();
+  const places = [
+    "amman",
+    "irbid",
+    "zarqa",
+    "balqa",
+    "madaba",
+    "karak",
+    "tafilah",
+    "ma'an",
+    "aqaba",
+    "jerash",
+    "ajloun",
+    "mafraq",
+  ];
+
+  useEffect(() => {
+    i18n.changeLanguage(currentLanguage);
+  }, [i18n, currentLanguage]);
+
   return (
     <>
       <Box
         sx={{
-          width: { xs: "100%", md: "80%" },
+          width: "100%",
           display: "flex",
           gap: "10px",
           alignItems: "flex-end",
@@ -46,29 +71,18 @@ export default function CountrySelection({
             },
           }}
         >
-          <InputLabel id="location-label">Select Location</InputLabel>
+          <InputLabel>{t("select location")}</InputLabel>
           <Select
-            labelId="location-label"
             value={location}
             onChange={(e) => onLocationChange(e.target.value)}
-            label="Select Location"
           >
-            {[
-              "Amman",
-              "Irbid",
-              "Zarqa",
-              "Balqa",
-              "Madaba",
-              "Karak",
-              "Tafilah",
-              "Ma'an",
-              "Aqaba",
-              "Jerash",
-              "Ajloun",
-              "Mafraq",
-            ].map((place) => (
-              <MenuItem key={place} value={place}>
-                {place}
+            {places.map((place) => (
+              <MenuItem
+                sx={{ direction: currentLanguage === "ar" ? "rtl" : "ltr" }}
+                key={place}
+                value={place}
+              >
+                {t(place)}
               </MenuItem>
             ))}
           </Select>
@@ -82,8 +96,11 @@ export default function CountrySelection({
               textTransform: "none",
             }}
             variant="text"
+            onClick={() =>
+              setNewLanguage(currentLanguage === "ar" ? "en" : "ar")
+            }
           >
-            Arabic
+            {currentLanguage === "en" ? "عربي" : "English"}
           </Button>
         </Stack>
       </Box>

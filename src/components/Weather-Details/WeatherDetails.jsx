@@ -1,13 +1,20 @@
 import { Box, Grid, Typography } from "@mui/material";
 import moment from "moment-timezone";
+import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { LanguageContext } from "../../context/LanguageContext";
 
-export default function WeatherDetails({ weather, timezone }) {
+export default function WeatherDetails({ weather }) {
   const mainWeather = weather.weather[0].main;
   const location = weather.name;
   const windSpeed = weather.wind.speed;
   const { temp, humidity } = weather.main;
   const { t, i18n } = useTranslation();
+  const { currentLanguage } = useContext(LanguageContext);
+
+  useEffect(() => {
+    i18n.changeLanguage(currentLanguage);
+  }, [currentLanguage, i18n]);
 
   return (
     <>
@@ -29,7 +36,7 @@ export default function WeatherDetails({ weather, timezone }) {
                 },
               }}
             >
-              {t(location)}
+              {t(location.split(" ")[0].toLowerCase())}
             </Typography>
             <Typography
               variant="h5"
@@ -41,7 +48,7 @@ export default function WeatherDetails({ weather, timezone }) {
                 },
               }}
             >
-              {moment().tz(timezone).format("dddd hh:mm A")}
+              {moment().format("dddd hh:mm A")}
             </Typography>
           </Box>
         </Grid>
@@ -69,7 +76,7 @@ export default function WeatherDetails({ weather, timezone }) {
                 },
               }}
             >
-              {mainWeather}
+              {t(mainWeather.toLowerCase())}
             </Typography>
             <Typography
               variant="subtitle1"
@@ -81,7 +88,7 @@ export default function WeatherDetails({ weather, timezone }) {
                 },
               }}
             >
-              Humidity: {humidity}%
+              {t("humidity".toLowerCase())}: {humidity}%
             </Typography>
             <Typography
               variant="subtitle1"
@@ -93,7 +100,7 @@ export default function WeatherDetails({ weather, timezone }) {
                 },
               }}
             >
-              Wind Speed: {windSpeed} m/s
+              {t("wind speed")}: {windSpeed} {t("m/s")}
             </Typography>
           </Box>
         </Grid>

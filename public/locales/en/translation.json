@@ -95,5 +95,8 @@
   "thu": "Thu",
   "fri": "Fri",
   "sat": "Sat",
-  "sun": "Sun"
+  "sun": "Sun",
+  "weekly average tempreture": "Weekly Average Tempreture",
+  "m/s": "m/s",
+  "select location": "Select Location"
 }

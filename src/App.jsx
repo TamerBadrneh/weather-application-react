@@ -1,14 +1,16 @@
 import { Box, CircularProgress, Container, Stack } from "@mui/material";
 import PredictionList from "./components/Predictions-List/PredictionsList";
 import WeatherDetails from "./components/Weather-Details/WeatherDetails";
-import CountrySelection from "./components/CountrySelection/SearchBar";
-import { useEffect, useState } from "react";
+import CountrySelection from "./components/CountrySelection/CountrySelection";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { LanguageContext } from "./context/LanguageContext";
 
 export default function App() {
-  const [location, setLocation] = useState("Amman");
+  const [location, setLocation] = useState("amman");
   const [weather, setWeather] = useState(null);
   const [weeklyWeatherTemps, setWeeklyWeatherTemps] = useState(null);
+  const { currentLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     fetchWeather();
@@ -40,6 +42,7 @@ export default function App() {
     <Box
       sx={{
         backgroundColor: (theme) => theme.palette.background.default,
+        direction: currentLanguage === "ar" ? "rtl" : "ltr",
       }}
     >
       <Container
@@ -64,10 +67,7 @@ export default function App() {
             {/* End of Searchbar */}
 
             {/* Response Data */}
-            <WeatherDetails
-              weather={weather}
-              timezone={weeklyWeatherTemps.timezone}
-            />
+            <WeatherDetails weather={weather} />
             {/* End of Response Data */}
 
             {/* Prediction Card */}
