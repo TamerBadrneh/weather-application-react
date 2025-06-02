@@ -1,12 +1,15 @@
-import { useContext } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import moment from "moment";
-import { LanguageContext } from "./LanguageContext";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function AppThemeProvider({ children }) {
-  const { currentLanguage } = useContext(LanguageContext);
-
+  const { i18n } = useTranslation();
   const sixPM = moment().set({ hour: 18, minute: 0, second: 0 });
+
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
 
   const theme = createTheme({
     palette: {
@@ -22,7 +25,7 @@ export default function AppThemeProvider({ children }) {
       },
     },
     typography: {
-      fontFamily: currentLanguage === "en" ? "Poppins" : "IBM Plex Sans Arabic",
+      fontFamily: i18n.language === "en" ? "Poppins" : "IBM Plex Sans Arabic",
     },
   });
 

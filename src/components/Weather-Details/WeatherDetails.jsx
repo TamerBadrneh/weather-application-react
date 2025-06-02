@@ -1,20 +1,13 @@
 import { Box, Grid, Typography } from "@mui/material";
 import moment from "moment-timezone";
-import { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { LanguageContext } from "../../context/LanguageContext";
 
 export default function WeatherDetails({ weather }) {
   const mainWeather = weather.weather[0].main;
   const location = weather.name;
   const windSpeed = weather.wind.speed;
   const { temp, humidity } = weather.main;
-  const { t, i18n } = useTranslation();
-  const { currentLanguage } = useContext(LanguageContext);
-
-  useEffect(() => {
-    i18n.changeLanguage(currentLanguage);
-  }, [currentLanguage, i18n]);
+  const { t } = useTranslation();
 
   return (
     <>

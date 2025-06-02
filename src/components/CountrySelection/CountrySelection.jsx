@@ -9,8 +9,6 @@ import {
   Stack,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useContext, useEffect } from "react";
-import { LanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 export default function CountrySelection({
@@ -18,7 +16,6 @@ export default function CountrySelection({
   onLocationChange,
   onSearchClick,
 }) {
-  const { currentLanguage, setNewLanguage } = useContext(LanguageContext);
   const { t, i18n } = useTranslation();
   const places = [
     "amman",
@@ -34,10 +31,6 @@ export default function CountrySelection({
     "ajloun",
     "mafraq",
   ];
-
-  useEffect(() => {
-    i18n.changeLanguage(currentLanguage);
-  }, [i18n, currentLanguage]);
 
   return (
     <>
@@ -78,7 +71,7 @@ export default function CountrySelection({
           >
             {places.map((place) => (
               <MenuItem
-                sx={{ direction: currentLanguage === "ar" ? "rtl" : "ltr" }}
+                sx={{ direction: i18n.language === "ar" ? "rtl" : "ltr" }}
                 key={place}
                 value={place}
               >
@@ -94,13 +87,15 @@ export default function CountrySelection({
           <Button
             sx={{
               textTransform: "none",
+              fontFamily:
+                i18n.language === "en" ? "IBM Plex Sans Arabic" : "Poppins",
             }}
             variant="text"
             onClick={() =>
-              setNewLanguage(currentLanguage === "ar" ? "en" : "ar")
+              i18n.changeLanguage(i18n.language === "ar" ? "en" : "ar")
             }
           >
-            {currentLanguage === "en" ? "عربي" : "English"}
+            {i18n.language === "en" ? "عربي" : "English"}
           </Button>
         </Stack>
       </Box>

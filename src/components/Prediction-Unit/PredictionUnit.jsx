@@ -1,16 +1,9 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import moment from "moment";
-import { useContext, useEffect } from "react";
-import { LanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 export default function PredictionUnit({ date, temp, forecastData }) {
-  const { currentLanguage } = useContext(LanguageContext);
-  const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    i18n.changeLanguage(currentLanguage);
-  }, [i18n, currentLanguage]);
+  const { t } = useTranslation();
 
   return (
     <>
