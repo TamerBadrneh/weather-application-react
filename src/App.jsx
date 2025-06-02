@@ -61,11 +61,9 @@ export default function App() {
             <CountrySelection
               location={location}
               onLocationChange={(value) => setLocation(value)}
-              onSearchClick={() => fetchWeather()}
+              fetch={fetchWeather}
             />
-
             <WeatherDetails weather={weather} />
-
             <PredictionList weeklyWeatherTemps={weeklyWeatherTemps} />
           </>
         ) : (

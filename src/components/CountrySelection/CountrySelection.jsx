@@ -10,11 +10,12 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export default function CountrySelection({
   location,
   onLocationChange,
-  onSearchClick,
+  fetch,
 }) {
   const { t, i18n } = useTranslation();
   const places = [
@@ -31,6 +32,10 @@ export default function CountrySelection({
     "ajloun",
     "mafraq",
   ];
+
+  useEffect(() => {
+    fetch();
+  }, [location]);
 
   return (
     <>
@@ -81,9 +86,6 @@ export default function CountrySelection({
           </Select>
         </FormControl>
         <Stack direction="row" gap="5px" alignItems={"flex-end"}>
-          <IconButton color="secondary" onClick={onSearchClick}>
-            <SearchIcon color="primary" />
-          </IconButton>
           <Button
             sx={{
               textTransform: "none",
