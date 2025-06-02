@@ -1,11 +1,13 @@
 import { Box, Grid, Typography } from "@mui/material";
 import moment from "moment-timezone";
+import { useTranslation } from "react-i18next";
 
 export default function WeatherDetails({ weather, timezone }) {
   const mainWeather = weather.weather[0].main;
   const location = weather.name;
   const windSpeed = weather.wind.speed;
   const { temp, humidity } = weather.main;
+  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function WeatherDetails({ weather, timezone }) {
                 },
               }}
             >
-              {location}
+              {t(location)}
             </Typography>
             <Typography
               variant="h5"

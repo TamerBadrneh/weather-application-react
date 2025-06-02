@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Container, Stack } from "@mui/material";
 import PredictionList from "./components/Predictions-List/PredictionsList";
 import WeatherDetails from "./components/Weather-Details/WeatherDetails";
-import Searchbar from "./components/SearchBar/SearchBar";
+import CountrySelection from "./components/CountrySelection/SearchBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -56,7 +56,7 @@ export default function App() {
         {weather && weeklyWeatherTemps ? (
           <>
             {/* Searchbar */}
-            <Searchbar
+            <CountrySelection
               location={location}
               onLocationChange={(value) => setLocation(value)}
               onSearchClick={() => fetchWeather()}
