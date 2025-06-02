@@ -33,6 +33,10 @@ export default function CountrySelection({
     "mafraq",
   ];
 
+  function isArabic() {
+    return i18n.language === "ar";
+  }
+
   useEffect(() => {
     fetch();
   }, [location]);
@@ -76,7 +80,7 @@ export default function CountrySelection({
           >
             {places.map((place) => (
               <MenuItem
-                sx={{ direction: i18n.language === "ar" ? "rtl" : "ltr" }}
+                sx={{ direction: isArabic() ? "rtl" : "ltr" }}
                 key={place}
                 value={place}
               >
@@ -89,15 +93,14 @@ export default function CountrySelection({
           <Button
             sx={{
               textTransform: "none",
-              fontFamily:
-                i18n.language === "en" ? "IBM Plex Sans Arabic" : "Poppins",
+              fontFamily: !isArabic() ? "IBM Plex Sans Arabic" : "Poppins",
             }}
             variant="text"
             onClick={() =>
               i18n.changeLanguage(i18n.language === "ar" ? "en" : "ar")
             }
           >
-            {i18n.language === "en" ? "عربي" : "English"}
+            {!isArabic() ? "عربي" : "English"}
           </Button>
         </Stack>
       </Box>

@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Container, Stack } from "@mui/material";
 import PredictionList from "./components/Predictions-List/PredictionsList";
 import WeatherDetails from "./components/Weather-Details/WeatherDetails";
-import CountrySelection from "./components/CountrySelection/CountrySelection";
+import CountrySelection from "./components/Country-Selection/CountrySelection";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ export default function App() {
         fetchWeeklyWeatherTemps(data.coord.lon, data.coord.lat);
         setWeather(data);
       })
-      .catch((error) => console.log(error));
+      .catch((err) => console.log(err));
   };
 
   const fetchWeeklyWeatherTemps = (longitude, latitude) => {
@@ -35,7 +35,7 @@ export default function App() {
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=auto`
       )
       .then((response) => setWeeklyWeatherTemps(response.data))
-      .catch((error) => console.log(error));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -67,9 +67,11 @@ export default function App() {
             <PredictionList weeklyWeatherTemps={weeklyWeatherTemps} />
           </>
         ) : (
-          <Stack justifyContent="center" alignItems="center">
-            <CircularProgress />
-          </Stack>
+          <>
+            <Stack justifyContent="center" alignItems="center">
+              <CircularProgress />
+            </Stack>
+          </>
         )}
       </Container>
     </Box>

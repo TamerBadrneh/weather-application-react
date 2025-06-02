@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
-import moment from "moment-timezone";
+import moment from "moment";
+import "moment/locale/ar";
 import { useTranslation } from "react-i18next";
 
 export default function WeatherDetails({ weather }) {
@@ -7,7 +8,7 @@ export default function WeatherDetails({ weather }) {
   const location = weather.name;
   const windSpeed = weather.wind.speed;
   const { temp, humidity } = weather.main;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -41,7 +42,7 @@ export default function WeatherDetails({ weather }) {
                 },
               }}
             >
-              {moment().format("dddd hh:mm A")}
+              {moment().locale(i18n.language).format("dddd hh:mm A")}
             </Typography>
           </Box>
         </Grid>
